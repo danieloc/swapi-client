@@ -20,7 +20,7 @@ const initState: UserState = {
 };
 
 const getters: GetterTree<UserState, RootState> = {
-  getUsers: (state) => {
+  allUsers: (state) => {
     return { users: state.users, totalCount: state.totalCount };
   },
 };

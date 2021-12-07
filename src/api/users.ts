@@ -16,7 +16,6 @@ export const getUsers = async (
     }>(`http://swapi.dev/api/people?page=${page}`);
     return { totalCount: data.count, users: data.results };
   } catch (e) {
-    // TODO: Add an error state for failing to fetch people
     console.log(
       "There was an error while trying to fetch the users from swapi.",
       e
