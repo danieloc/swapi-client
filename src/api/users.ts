@@ -14,11 +14,8 @@ type User = {
   planetName: string;
 };
 
- export const getUsers = async (page: number) => {
-    try {
-      await axios.get<UserResponse>(`http://swapi.dev/api/people?page=${page}`);
-    } catch (e) {
-        
-    }
-  },
+export const getUsers = async (page: number) => {
+  try {
+    await axios.get<UserResponse>(`http://swapi.dev/api/people?page=${page}`);
+  } catch (e) {}
 };
