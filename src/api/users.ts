@@ -1,17 +1,9 @@
 import axios from "axios";
+import { User } from "../types";
 
 type UserResponse = {
   count: number;
   results: User[];
-};
-
-type User = {
-  name: string;
-  height: string;
-  mass: number;
-  created: Date;
-  edited: Date;
-  planetName: string;
 };
 
 export const getUsers = async (page: number) => {
