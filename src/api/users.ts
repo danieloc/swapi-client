@@ -11,7 +11,7 @@ export const getUsers = async (page: number) => {
     const { data } = await axios.get<UserResponse>(
       `http://swapi.dev/api/people?page=${page}`
     );
-    return { totalCountUsers: data.count, users: data.results };
+    return { totalCount: data.count, users: data.results };
   } catch (e) {
     // TODO: Add an error state for failing to fetch people
   }

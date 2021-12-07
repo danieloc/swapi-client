@@ -8,12 +8,14 @@ Vue.use(Vuex);
 
 type State = {
   users: User[];
+  totalCount: number;
 };
 
 type RootState = State;
 
 const initState: State = {
   users: [],
+  totalCount: 0,
 };
 
 const getters: GetterTree<State, RootState> = {
@@ -29,10 +31,14 @@ const mutations: MutationTree<State> = {
 };
 
 const actions: ActionTree<State, RootState> = {
-  fetchUserId: async () => {
+  fetchUserId: async ({ commit }) => {
     const response = await getUsers(1);
-    if (response) {
+    if (!response) {
+      return;
     }
+    const { users, totalCount } = response;
+    // TODO: Find a way to make these commits more type safe. Commit is accepting anything here. Must be a nicer way for the linter.
+    commit("setUsers", { users, totalCount });
   },
 };
 
