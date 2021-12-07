@@ -36,6 +36,7 @@ const actions: ActionTree<State, RootState> = {
     if (!response) {
       return;
     }
+
     const { users, totalCount } = response;
     // TODO: Find a way to make these commits more type safe. Commit is accepting anything here. Must be a nicer way for the linter.
     commit("setUsers", { users, totalCount });
@@ -44,7 +45,7 @@ const actions: ActionTree<State, RootState> = {
 
 export default new Vuex.Store({
   state: initState,
-  mutations: mutations,
-  actions: actions,
+  mutations,
+  actions,
   getters,
 });
