@@ -24,7 +24,8 @@ const getters: GetterTree<UserState, unknown> = {
 
 const mutations: MutationTree<UserState> = {
   setUsers: (state, payload) => {
-    state.users = payload;
+    state.users = payload.users;
+    state.totalCount = payload.totalCount;
   },
 
   recordErrorFetchingUser: (state) => {

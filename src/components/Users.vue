@@ -9,11 +9,15 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default Vue.extend({
   name: "Users",
+  methods: mapActions(["fetchUsers"]),
   computed: mapGetters(["allUsers"]),
+  created() {
+    this.fetchUsers();
+  },
 });
 </script>
 
