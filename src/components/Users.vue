@@ -10,10 +10,15 @@
         <th>Edited</th>
         <th>Planet Name</th>
       </tr>
+      <tr v-for="user in allUsers" class="user" :key="user.name">
+        <td>{{ user.name }}</td>
+        <td>{{ user.height }}</td>
+        <td>{{ user.mass }}</td>
+        <td>{{ user.created }}</td>
+        <td>{{ user.edited }}</td>
+        <td>{{ user.planetName }}</td>
+      </tr>
     </table>
-    <div v-for="user in allUsers" class="user" :key="user.name">
-      {{ user.name }}
-    </div>
   </div>
 </template>
 
