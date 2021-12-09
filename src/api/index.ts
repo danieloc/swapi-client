@@ -1,7 +1,7 @@
 import { Planet } from "@/types";
 import axios from "axios";
 
-type SwapiUser = {
+export type SwapiUser = {
   name: string;
   height: string;
   mass: number;
@@ -12,30 +12,30 @@ type SwapiUser = {
 
 type ApiResponse = {
   totalCount: number;
-  users: SwapiUser[];
+  partialUsers: SwapiUser[];
 };
 
 export const getUsersFromSwapi = async (
   page: number
-): Promise<ApiResponse | "ERROR"> => {
+): Promise<ApiResponse | undefined> => {
   try {
     const { data } = await axios.get<{
       count: number;
       results: SwapiUser[];
     }>(`http://swapi.dev/api/people?page=${page}`);
-    return { totalCount: data.count, users: data.results };
+    return { totalCount: data.count, partialUsers: data.results };
   } catch (e) {
     console.log(
       "There was an error while trying to fetch the users from swapi.",
       e
     );
-    return "ERROR";
+    return undefined;
   }
 };
 
 export const getPlanetFromSwapi = async (
   url: string
-): Promise<Planet | "ERROR"> => {
+): Promise<Planet | undefined> => {
   try {
     const { data } = await axios.get<Planet>(url);
     return data;
@@ -44,6 +44,5 @@ export const getPlanetFromSwapi = async (
       `There was an error while trying to fetch the homeworld at url ${url}`,
       e
     );
-    return "ERROR";
   }
 };

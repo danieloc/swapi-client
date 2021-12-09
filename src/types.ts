@@ -11,5 +11,5 @@ export type User = {
   mass: number;
   created: Date;
   edited: Date;
-  homeworld: string;
+  homeworld?: Planet;
 };

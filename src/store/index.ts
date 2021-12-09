@@ -1,7 +1,7 @@
 import Vue from "vue";
-import Vuex, { ActionTree, GetterTree, MutationTree } from "vuex";
+import Vuex, { GetterTree, MutationTree } from "vuex";
 import { Planet, User } from "@/types";
-import { getUsersFromSwapi, getPlanetFromSwapi } from "@/api/users";
+import { actions } from "./actions";
 
 Vue.use(Vuex);
 
@@ -22,8 +22,7 @@ const initState: UserState = {
 };
 
 const getters: GetterTree<UserState, unknown> = {
-  getUsers: (state) => state.users,
-  getPlanet: (state, url) => state.planets[url],
+  allUsers: (state) => state.users,
 };
 
 const mutations: MutationTree<UserState> = {
@@ -39,27 +38,6 @@ const mutations: MutationTree<UserState> = {
   },
 };
 
-const actions: ActionTree<UserState, unknown> = {
-  fetchUsers: async ({ commit, getters }) => {
-    const response = await getUsersFromSwapi(1);
-    if (response === "ERROR") {
-      return commit("recordErrorFetchingUser");
-    }
-
-    const { users, totalCount } = response;
-
-    // TODO: Find a way to make these commits typed. Commit is accepting anything here. Must be more extensible way
-    commit("setUsers", { users, totalCount });
-  },
-  fetchPlanet: async ({ commit }, url: string) => {
-    const response = await getPlanetFromSwapi(url);
-    if (response === "ERROR") {
-      return commit("recordErrorFetchingPlanet");
-    }
-
-    commit("addPlanet", { url, planet: response });
-  },
-};
 export const store = new Vuex.Store({
   state: initState,
   actions,
