@@ -16,7 +16,7 @@
         <td>{{ user.mass }}</td>
         <td>{{ user.created }}</td>
         <td>{{ user.edited }}</td>
-        <td>{{ user.planetName }}</td>
+        <td>{{ user.homeworld.name }}</td>
       </tr>
     </table>
   </div>
