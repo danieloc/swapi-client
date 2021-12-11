@@ -15,6 +15,7 @@
         allPlanets[user.homeworldUrl] ? allPlanets[user.homeworldUrl].name : ""
       }}
     </div>
+    <img :src="mySVG" />
     <button v-on:click="openPopup(user.homeworldUrl)">Display Details</button>
   </div>
 </template>
@@ -32,6 +33,11 @@ export default Vue.extend({
       type: Object as PropType<User>,
       required: true,
     },
+  },
+  data: () => {
+    return {
+      mySVG: require("../assets/icons8-info.svg"),
+    };
   },
   methods: mapActions(["openPopup"]),
   computed: mapGetters(["allPlanets"]),
