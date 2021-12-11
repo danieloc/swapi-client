@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Users from "./components/Users.vue";
+import Users from "./components/UserTable.vue";
 
 export default Vue.extend({
   name: "App",
