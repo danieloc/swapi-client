@@ -5,9 +5,11 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { mapGetters } from "vuex";
 
 export default Vue.extend({
   name: "Popup",
+  computed: mapGetters(["popupPlanetDetails"]),
 });
 </script>
 

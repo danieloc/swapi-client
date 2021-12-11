@@ -15,13 +15,14 @@
         allPlanets[user.homeworldUrl] ? allPlanets[user.homeworldUrl].name : ""
       }}
     </div>
+    <button v-on:click="openPopup(user.homeworldUrl)">Say what</button>
   </div>
 </template>
 
 <script lang="ts">
 import { User } from "@/types";
 import Vue, { PropType } from "vue";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import { formatDistance } from "date-fns";
 
 export default Vue.extend({
@@ -32,10 +33,10 @@ export default Vue.extend({
       required: true,
     },
   },
+  methods: mapActions(["openPopup"]),
   computed: mapGetters(["allPlanets"]),
   filters: {
     formatDistance: (value: string) => {
-      console.log("Converting");
       return formatDistance(new Date(value), new Date(), {
         addSuffix: true,
       });

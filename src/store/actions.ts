@@ -35,7 +35,7 @@ export const actions: ActionTree<State, unknown> = {
     );
   },
 
-  openPopup: ({ commit }) => {
-    commit("setPopupOpen");
+  openPopup: ({ commit }, url) => {
+    commit("setPopupOpen", url);
   },
 };
