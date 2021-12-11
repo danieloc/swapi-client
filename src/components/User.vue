@@ -3,8 +3,12 @@
     <div><span class="label">Name:</span> {{ user.name }}</div>
     <div><span class="label">Height:</span>{{ user.height }}</div>
     <div><span class="label">Mass:</span>{{ user.mass }}</div>
-    <div><span class="label">Created:</span>{{ user.created }}</div>
-    <div><span class="label">Edited:</span>{{ user.edited }}</div>
+    <div>
+      <span class="label">Created:</span>{{ user.created | formatDistance }}
+    </div>
+    <div>
+      <span class="label">Edited:</span>{{ user.edited | formatDistance }}
+    </div>
     <div>
       <span class="label">Planet:</span>
       {{
@@ -18,6 +22,7 @@
 import { User } from "@/types";
 import Vue, { PropType } from "vue";
 import { mapGetters } from "vuex";
+import { formatDistance } from "date-fns";
 
 export default Vue.extend({
   name: "User",
@@ -28,6 +33,12 @@ export default Vue.extend({
     },
   },
   computed: mapGetters(["allPlanets"]),
+  filters: {
+    formatDistance: (value: string) => {
+      console.log("Converting");
+      return formatDistance(new Date(value), new Date());
+    },
+  },
 });
 </script>
 
