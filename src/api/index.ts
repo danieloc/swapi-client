@@ -39,9 +39,7 @@ export const getUserPageFromSwapi = async (
   }
 };
 
-
-
-export const getAllUsersFromSwapi = async (page: number = 1): Promise<User[]> => {
+export const getAllUsersFromSwapi = async (page = 1): Promise<User[]> => {
   const response = await getUserPageFromSwapi(page);
   if (!response) {
     throw new Error("No user received from swapi api");
@@ -49,12 +47,12 @@ export const getAllUsersFromSwapi = async (page: number = 1): Promise<User[]> =>
 
   const { users, hasNext } = response;
 
-  if(!hasNext) {
-    return users
+  if (!hasNext) {
+    return users;
   }
 
-  const restUsers = await getAllUsersFromSwapi(page + 1)
-  return [...users, ...restUsers]
+  const restUsers = await getAllUsersFromSwapi(page + 1);
+  return [...users, ...restUsers];
 };
 
 export const getPlanetFromSwapi = async (
@@ -69,3 +67,4 @@ export const getPlanetFromSwapi = async (
       e
     );
   }
+};

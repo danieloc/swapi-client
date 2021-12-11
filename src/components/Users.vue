@@ -16,7 +16,7 @@
         <td>{{ user.mass }}</td>
         <td>{{ user.created }}</td>
         <td>{{ user.edited }}</td>
-        <td>{{ user.homeworld.name }}</td>
+        <td>{{ JSON.stringify(allPlanets) }}</td>
       </tr>
     </table>
   </div>
@@ -29,7 +29,7 @@ import { mapActions, mapGetters } from "vuex";
 export default Vue.extend({
   name: "Users",
   methods: mapActions(["fetchUsers"]),
-  computed: mapGetters(["allUsers"]),
+  computed: mapGetters(["allUsers", "allPlanets"]),
   created() {
     this.fetchUsers();
   },

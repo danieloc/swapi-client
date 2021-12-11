@@ -11,24 +11,22 @@ export type UserState = {
     [key: string]: Planet;
   };
   hasError: boolean;
-  totalCount: number;
 };
 
 const initState: UserState = {
   planets: {},
   users: [],
-  totalCount: 0,
   hasError: false,
 };
 
 const getters: GetterTree<UserState, unknown> = {
   allUsers: (state) => state.users,
+  allPlanets: (state) => state.planets,
 };
 
 const mutations: MutationTree<UserState> = {
   setUsers: (state, payload) => {
     state.users = payload.users;
-    state.totalCount = payload.totalCount;
   },
   recordErrorFetchingUser: (state) => {
     state.hasError = true;

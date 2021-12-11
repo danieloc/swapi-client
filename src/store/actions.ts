@@ -3,15 +3,13 @@ import { ActionTree } from "vuex";
 import { UserState } from ".";
 
 export const actions: ActionTree<UserState, unknown> = {
-  fetchUsers: async ({ commit, state, dispatch }) => {
+  fetchUsers: async ({ commit, dispatch }) => {
     try {
       const users = await getAllUsersFromSwapi();
 
       commit("setUsers", { users });
 
-      dispatch("fetchPlanet");
-
-      actions.fetch;
+      dispatch("fetchPlanets");
     } catch (error) {
       commit("recordErrorFetchingUser");
     }
