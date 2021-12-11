@@ -16,7 +16,7 @@
         <td>{{ user.mass }}</td>
         <td>{{ user.created }}</td>
         <td>{{ user.edited }}</td>
-        <td>{{ JSON.stringify(allPlanets) }}</td>
+        <td>{{ allPlanets[user.homeworldUrl].name }}</td>
       </tr>
     </table>
   </div>

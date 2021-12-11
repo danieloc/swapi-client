@@ -32,7 +32,7 @@ const mutations: MutationTree<UserState> = {
     state.hasError = true;
   },
   addPlanet: (state, { url, planet }) => {
-    state.planets[url] = planet;
+    state.planets = { ...state.planets, [url]: planet };
   },
 };
 
