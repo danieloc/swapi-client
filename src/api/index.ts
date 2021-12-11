@@ -1,4 +1,4 @@
-import { Planet } from "@/types";
+import { Planet, User } from "@/types";
 import axios from "axios";
 
 export type SwapiUser = {
@@ -12,7 +12,7 @@ export type SwapiUser = {
 
 type ApiResponse = {
   totalCount: number;
-  partialUsers: SwapiUser[];
+  users: User[];
 };
 
 export const getUsersFromSwapi = async (
@@ -23,7 +23,13 @@ export const getUsersFromSwapi = async (
       count: number;
       results: SwapiUser[];
     }>(`http://swapi.dev/api/people?page=${page}`);
-    return { totalCount: data.count, partialUsers: data.results };
+    return {
+      totalCount: data.count,
+      users: data.results.map((user) => ({
+        ...user,
+        homeworldUrl: user.homeworld,
+      })),
+    };
   } catch (e) {
     console.log(
       "There was an error while trying to fetch the users from swapi.",

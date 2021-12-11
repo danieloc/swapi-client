@@ -1,38 +1,41 @@
-import { getUsersFromSwapi, getPlanetFromSwapi, SwapiUser } from "@/api";
-import { User } from "@/types";
+import { getUsersFromSwapi, getPlanetFromSwapi } from "@/api";
 import { ActionTree } from "vuex";
 import { UserState } from ".";
 
 export const actions: ActionTree<UserState, unknown> = {
   fetchUsers: async ({ commit, state }) => {
-    const response = await getUsersFromSwapi(1);
-    if (!response) {
-      return commit("recordErrorFetchingUser");
-    }
-
-    const { partialUsers, totalCount } = response;
-
-    const mapUserToPlanet = async (swapiUser: SwapiUser): Promise<User> => {
-      const homeworldUrl = swapiUser.homeworld;
-      const cachedPlanet = state.planets[homeworldUrl];
-      if (cachedPlanet) {
-        return {
-          ...swapiUser,
-          homeworld: cachedPlanet,
-        };
+    try {
+      const response = await getUsersFromSwapi(1);
+      if (!response) {
+        throw new Error("No user received from swapi api");
       }
 
-      const homeworld = await getPlanetFromSwapi(homeworldUrl);
+      const { users, totalCount } = response;
 
-      return {
-        ...swapiUser,
-        homeworld,
-      };
-    };
+      const nonCachedPlanets = users.filter(
+        ({ homeworldUrl }) => !state.planets[homeworldUrl]
+      );
 
-    const users = await Promise.all(partialUsers.map(mapUserToPlanet));
+      // Removes duplicate planets
+      const uniqueNonCachedPlanets = [
+        ...new Set(nonCachedPlanets.map(({ homeworldUrl }) => homeworldUrl)),
+      ];
 
-    // TODO: Find a way to make these commits typed. Commit is accepting anything here. Must be more extensible way
-    commit("setUsers", { users, totalCount });
+      await Promise.all(
+        uniqueNonCachedPlanets.map(async (planetUrl) => {
+          const planet = await getPlanetFromSwapi(planetUrl);
+          if (!planet) {
+            throw new Error("Failed to retrieve planet");
+          }
+
+          commit("addPlanet", { url: planetUrl, planet });
+        })
+      );
+
+      // TODO: Find a way to make these commits typed. Commit is accepting anything here. Must be more extensible way
+      commit("setUsers", { users, totalCount });
+    } catch (error) {
+      commit("recordErrorFetchingUser");
+    }
   },
 };
