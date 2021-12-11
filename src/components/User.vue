@@ -1,11 +1,12 @@
 <template>
-  <div class="user" :key="user.name">
-    <div>Name: {{ user.name }}</div>
-    <div>Height: {{ user.height }}</div>
-    <div>Card: {{ user.mass }}</div>
-    <div>Created: {{ user.created }}</div>
-    <div>Edited: {{ user.edited }}</div>
+  <div class="user-container" :key="user.name">
+    <div><span class="label">Name:</span> {{ user.name }}</div>
+    <div><span class="label">Height:</span>{{ user.height }}</div>
+    <div><span class="label">Mass:</span>{{ user.mass }}</div>
+    <div><span class="label">Created:</span>{{ user.created }}</div>
+    <div><span class="label">Edited:</span>{{ user.edited }}</div>
     <div>
+      <span class="label">Planet:</span>
       {{
         allPlanets[user.homeworldUrl] ? allPlanets[user.homeworldUrl].name : ""
       }}
@@ -31,16 +32,20 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
-.user {
+.user-container {
   max-width: 400px;
   background: black;
   position: relative;
   width: 300px;
   margin: 16px;
+
+  .label {
+    color: white;
+  }
 }
 
 // Straight up stole this :before and :after from here -> https://codepen.io/sam_garcia2/pen/gOaMpYo
-.user:before {
+.user-container:before {
   content: "";
   position: absolute;
   top: -2px;
@@ -51,7 +56,7 @@ export default Vue.extend({
   z-index: -1;
 }
 
-.user:after {
+.user-container:after {
   content: "";
   position: absolute;
   top: -2px;
@@ -63,8 +68,8 @@ export default Vue.extend({
   filter: blur(40px);
 }
 
-.user:before,
-.user:after {
+.user-container:before,
+.user-container:after {
   background: linear-gradient(235deg, #2196f3, #010615, #f00000);
 }
 </style>
