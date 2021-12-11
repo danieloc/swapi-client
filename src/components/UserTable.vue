@@ -10,20 +10,12 @@
         <th>Edited</th>
         <th>Planet Name</th>
       </tr>
-      <tr v-for="user in allUsers" class="user" :key="user.name">
-        <td>{{ user.name }}</td>
-        <td>{{ user.height }}</td>
-        <td>{{ user.mass }}</td>
-        <td>{{ user.created }}</td>
-        <td>{{ user.edited }}</td>
-        <td>
-          {{
-            allPlanets[user.homeworldUrl]
-              ? allPlanets[user.homeworldUrl].name
-              : ""
-          }}
-        </td>
-      </tr>
+      <UserRow
+        v-for="user in allUsers"
+        class="user"
+        :key="user.name"
+        v-bind:user="user"
+      />
     </table>
   </div>
 </template>
@@ -31,11 +23,15 @@
 <script lang="ts">
 import Vue from "vue";
 import { mapActions, mapGetters } from "vuex";
+import UserRow from "./User.vue";
 
 export default Vue.extend({
-  name: "Users",
+  name: "UserTable",
   methods: mapActions(["fetchUsers"]),
-  computed: mapGetters(["allUsers", "allPlanets"]),
+  components: {
+    UserRow,
+  },
+  computed: mapGetters(["allUsers"]),
   created() {
     this.fetchUsers();
   },

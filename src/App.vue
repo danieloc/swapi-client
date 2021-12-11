@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <Users />
+    <UserTable />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import Users from "./components/UserTable.vue";
+import UserTable from "./components/UserTable.vue";
 
 export default Vue.extend({
   name: "App",
   components: {
-    Users,
+    UserTable,
   },
 });
 </script>
