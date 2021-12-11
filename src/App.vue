@@ -1,18 +1,23 @@
 <template>
   <div id="app">
+    <Popup v-if="isPopupOpen" />
     <List />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import { mapGetters } from "vuex";
 import List from "./components/List.vue";
+import Popup from "./components/Popup.vue";
 
 export default Vue.extend({
   name: "App",
   components: {
     List,
+    Popup,
   },
+  computed: mapGetters(["isPopupOpen"]),
 });
 </script>
 

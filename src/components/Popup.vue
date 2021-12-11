@@ -1,6 +1,7 @@
 <template>
-  <div class="user-container" :key="user.name">
-    <h1>Popup component</h1>
+  <div class="popup">
+    <h1>{{ popupPlanetDetails.name }}</h1>
+  </div>
 </template>
 
 <script lang="ts">
@@ -12,6 +13,8 @@ export default Vue.extend({
   computed: mapGetters(["popupPlanetDetails"]),
 });
 </script>
-
 <style scoped lang="scss">
+.popup {
+  position: absolute;
+}
 </style>

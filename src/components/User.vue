@@ -15,7 +15,7 @@
         allPlanets[user.homeworldUrl] ? allPlanets[user.homeworldUrl].name : ""
       }}
     </div>
-    <button v-on:click="openPopup(user.homeworldUrl)">Say what</button>
+    <button v-on:click="openPopup(user.homeworldUrl)">Display Details</button>
   </div>
 </template>
 
