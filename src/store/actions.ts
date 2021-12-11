@@ -12,14 +12,12 @@ export const actions: ActionTree<UserState, unknown> = {
 
       const { users, totalCount } = response;
 
-      const nonCachedPlanets = users.filter(
-        ({ homeworldUrl }) => !state.planets[homeworldUrl]
-      );
+      const nonCachedPlanets = users
+        .map(({ homeworldUrl }) => homeworldUrl)
+        .filter((url) => !state.planets[url]);
 
-      // Removes duplicate planets
-      const uniqueNonCachedPlanets = [
-        ...new Set(nonCachedPlanets.map(({ homeworldUrl }) => homeworldUrl)),
-      ];
+      // Removes duplicate urls
+      const uniqueNonCachedPlanets = [...new Set(nonCachedPlanets)];
 
       await Promise.all(
         uniqueNonCachedPlanets.map(async (planetUrl) => {
