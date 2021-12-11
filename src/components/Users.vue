@@ -16,7 +16,13 @@
         <td>{{ user.mass }}</td>
         <td>{{ user.created }}</td>
         <td>{{ user.edited }}</td>
-        <td>{{ allPlanets[user.homeworldUrl].name }}</td>
+        <td>
+          {{
+            allPlanets[user.homeworldUrl]
+              ? allPlanets[user.homeworldUrl].name
+              : ""
+          }}
+        </td>
       </tr>
     </table>
   </div>

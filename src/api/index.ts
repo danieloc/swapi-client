@@ -24,10 +24,16 @@ export const getUserPageFromSwapi = async (
       next: string;
     }>(`http://swapi.dev/api/people?page=${page}`);
     return {
-      users: data.results.map((user) => ({
-        ...user,
-        homeworldUrl: user.homeworld,
-      })),
+      users: data.results.map(
+        (user): User => ({
+          name: user.name,
+          created: user.created,
+          edited: user.edited,
+          height: user.height,
+          mass: user.mass,
+          homeworldUrl: user.homeworld,
+        })
+      ),
       hasNext: !!data.next,
     };
   } catch (e) {
