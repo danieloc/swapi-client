@@ -10,7 +10,8 @@ export const actions: ActionTree<UserState, unknown> = {
         throw new Error("No user received from swapi api");
       }
 
-      const { users, totalCount } = response;
+      const { users, hasNext } = response;
+      commit("setUsers", { users });
 
       const nonCachedPlanets = users
         .map(({ homeworldUrl }) => homeworldUrl)
@@ -29,9 +30,6 @@ export const actions: ActionTree<UserState, unknown> = {
           commit("addPlanet", { url: planetUrl, planet });
         })
       );
-
-      // TODO: Find a way to make these commits typed. Commit is accepting anything here. Must be more extensible way
-      commit("setUsers", { users, totalCount });
     } catch (error) {
       commit("recordErrorFetchingUser");
     }

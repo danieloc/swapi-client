@@ -11,8 +11,8 @@ export type SwapiUser = {
 };
 
 type ApiResponse = {
-  totalCount: number;
   users: User[];
+  hasNext: boolean;
 };
 
 export const getUsersFromSwapi = async (
@@ -20,15 +20,15 @@ export const getUsersFromSwapi = async (
 ): Promise<ApiResponse | undefined> => {
   try {
     const { data } = await axios.get<{
-      count: number;
       results: SwapiUser[];
+      next: string;
     }>(`http://swapi.dev/api/people?page=${page}`);
     return {
-      totalCount: data.count,
       users: data.results.map((user) => ({
         ...user,
         homeworldUrl: user.homeworld,
       })),
+      hasNext: !!data.next,
     };
   } catch (e) {
     console.log(
