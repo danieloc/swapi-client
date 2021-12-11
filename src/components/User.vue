@@ -1,16 +1,16 @@
 <template>
-  <tr class="user" :key="user.name">
-    <td>{{ user.name }}</td>
-    <td>{{ user.height }}</td>
-    <td>{{ user.mass }}</td>
-    <td>{{ user.created }}</td>
-    <td>{{ user.edited }}</td>
-    <td>
+  <div class="user" :key="user.name">
+    <div>Name: {{ user.name }}</div>
+    <div>Height: {{ user.height }}</div>
+    <div>Card: {{ user.mass }}</div>
+    <div>Created: {{ user.created }}</div>
+    <div>Edited: {{ user.edited }}</div>
+    <div>
       {{
         allPlanets[user.homeworldUrl] ? allPlanets[user.homeworldUrl].name : ""
       }}
-    </td>
-  </tr>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -19,6 +19,7 @@ import Vue, { PropType } from "vue";
 import { mapGetters } from "vuex";
 
 export default Vue.extend({
+  name: "User",
   props: {
     user: {
       type: Object as PropType<User>,
@@ -30,5 +31,8 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
-//Styles
+.user {
+  background: linear-gradient(235deg, #2196f3, #010615, #f00000);
+  max-width: 400px;
+}
 </style>

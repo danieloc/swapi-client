@@ -1,35 +1,27 @@
 <template>
   <div>
     <h3>Users</h3>
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>Height</th>
-        <th>Mass</th>
-        <th>Created</th>
-        <th>Edited</th>
-        <th>Planet Name</th>
-      </tr>
-      <UserRow
+    <div class="list">
+      <User
         v-for="user in allUsers"
         class="user"
         :key="user.name"
         v-bind:user="user"
       />
-    </table>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import { mapActions, mapGetters } from "vuex";
-import UserRow from "./User.vue";
+import User from "./User.vue";
 
 export default Vue.extend({
-  name: "UserTable",
+  name: "List",
   methods: mapActions(["fetchUsers"]),
   components: {
-    UserRow,
+    User,
   },
   computed: mapGetters(["allUsers"]),
   created() {
@@ -38,6 +30,14 @@ export default Vue.extend({
 });
 </script>
 
-<style scoped lang="scss">
-//Styles
+<style lang="scss">
+.list {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 16px;
+
+  .user {
+    max-width: 400px;
+  }
+}
 </style>

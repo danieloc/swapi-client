@@ -1,28 +1,30 @@
 <template>
   <div id="app">
-    <UserTable />
+    <List />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import UserTable from "./components/UserTable.vue";
+import List from "./components/List.vue";
 
 export default Vue.extend({
   name: "App",
   components: {
-    UserTable,
+    List,
   },
 });
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+// Star wars font - would be better to download this and keep it in the app.
+// Should really have several different font formats other than woff - but MVP.
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
+
+body {
+  font-family: Audiowide;
+  color: black;
   margin-top: 60px;
+  background: #060c21;
 }
 </style>
