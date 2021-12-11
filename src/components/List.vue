@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Users</h3>
+    <h3 class="header">Users</h3>
     <div class="list">
       <User
         v-for="user in allUsers"
@@ -31,14 +31,13 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
+.header {
+  text-align: center;
+}
 .list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
   margin: 16px;
-
-  .user {
-    max-width: 400px;
-  }
+  justify-content: center;
 }
 </style>

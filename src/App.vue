@@ -27,5 +27,6 @@ body {
   color: black;
   margin-top: 60px;
   background: #060c21;
+  color: #fff200;
 }
 </style>

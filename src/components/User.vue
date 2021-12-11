@@ -33,10 +33,10 @@ export default Vue.extend({
 <style scoped lang="scss">
 .user {
   max-width: 400px;
-  color: #fff200;
   background: black;
   position: relative;
-  min-width: 100%;
+  width: 300px;
+  margin: 16px;
 }
 
 // Straight up stole this :before and :after from here -> https://codepen.io/sam_garcia2/pen/gOaMpYo
