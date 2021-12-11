@@ -15,7 +15,7 @@ type ApiResponse = {
   hasNext: boolean;
 };
 
-export const getUsersFromSwapi = async (
+export const getUserPageFromSwapi = async (
   page: number
 ): Promise<ApiResponse | undefined> => {
   try {
@@ -39,6 +39,24 @@ export const getUsersFromSwapi = async (
   }
 };
 
+
+
+export const getAllUsersFromSwapi = async (page: number = 1): Promise<User[]> => {
+  const response = await getUserPageFromSwapi(page);
+  if (!response) {
+    throw new Error("No user received from swapi api");
+  }
+
+  const { users, hasNext } = response;
+
+  if(!hasNext) {
+    return users
+  }
+
+  const restUsers = await getAllUsersFromSwapi(page + 1)
+  return [...users, ...restUsers]
+};
+
 export const getPlanetFromSwapi = async (
   url: string
 ): Promise<Planet | undefined> => {
@@ -51,4 +69,3 @@ export const getPlanetFromSwapi = async (
       e
     );
   }
-};
