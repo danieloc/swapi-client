@@ -33,8 +33,9 @@ export default Vue.extend({
 <style lang="scss">
 .list {
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 16px;
+  margin: 16px;
 
   .user {
     max-width: 400px;

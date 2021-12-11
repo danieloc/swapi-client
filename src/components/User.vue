@@ -32,7 +32,39 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 .user {
-  background: linear-gradient(235deg, #2196f3, #010615, #f00000);
   max-width: 400px;
+  color: #fff200;
+  background: black;
+  position: relative;
+  min-width: 100%;
+}
+
+// Straight up stole this :before and :after from here -> https://codepen.io/sam_garcia2/pen/gOaMpYo
+.user:before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: #fff;
+  z-index: -1;
+}
+
+.user:after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: #fff;
+  z-index: -2;
+  filter: blur(40px);
+}
+
+.user:before,
+.user:after {
+  background: linear-gradient(235deg, #2196f3, #010615, #f00000);
 }
 </style>
