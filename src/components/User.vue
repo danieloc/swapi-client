@@ -36,7 +36,9 @@ export default Vue.extend({
   filters: {
     formatDistance: (value: string) => {
       console.log("Converting");
-      return formatDistance(new Date(value), new Date());
+      return formatDistance(new Date(value), new Date(), {
+        addSuffix: true,
+      });
     },
   },
 });
@@ -49,6 +51,8 @@ export default Vue.extend({
   position: relative;
   width: 300px;
   margin: 16px;
+  // Requires this as data-fns returns lower case and it's better than a js function
+  text-transform: capitalize;
 
   .label {
     color: white;
