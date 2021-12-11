@@ -57,34 +57,29 @@ export default Vue.extend({
   .label {
     color: white;
   }
-}
 
-// Straight up stole this :before and :after from here -> https://codepen.io/sam_garcia2/pen/gOaMpYo
-.user-container:before {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: #fff;
-  z-index: -1;
-}
+  &:before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: #fff;
+    z-index: -1;
+  }
 
-.user-container:after {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: #fff;
-  z-index: -2;
-  filter: blur(40px);
-}
-
-.user-container:before,
-.user-container:after {
-  background: linear-gradient(235deg, #2196f3, #010615, #f00000);
+  &:after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: #fff;
+    z-index: -2;
+    filter: blur(40px);
+    background: linear-gradient(235deg, #2196f3, #010615, #f00000);
+  }
 }
 </style>
