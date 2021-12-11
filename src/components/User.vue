@@ -14,9 +14,13 @@
       {{
         allPlanets[user.homeworldUrl] ? allPlanets[user.homeworldUrl].name : ""
       }}
-      <img :src="mySVG" alt="info-icon" class="info-icon" />
+      <img
+        v-on:click="openPopup(user.homeworldUrl)"
+        :src="mySVG"
+        alt="info-icon"
+        class="info-icon"
+      />
     </div>
-    <button v-on:click="openPopup(user.homeworldUrl)">Display Details</button>
   </div>
 </template>
 
@@ -56,7 +60,8 @@ export default Vue.extend({
   max-width: 400px;
   background: black;
   position: relative;
-  width: 300px;
+  width: 450px;
+  padding: 16px;
   margin: 16px;
   // Requires this as data-fns returns lower case and it's better than a js function
   text-transform: capitalize;
