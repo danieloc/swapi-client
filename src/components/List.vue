@@ -8,6 +8,7 @@
         :key="user.name"
         v-bind:user="user"
       />
+      <Popup v-if="isPopupOpen" />
     </div>
   </div>
 </template>
@@ -16,14 +17,16 @@
 import Vue from "vue";
 import { mapActions, mapGetters } from "vuex";
 import User from "./User.vue";
+import Popup from "./Popup.vue";
 
 export default Vue.extend({
   name: "List",
   methods: mapActions(["fetchUsers"]),
   components: {
     User,
+    Popup,
   },
-  computed: mapGetters(["allUsers"]),
+  computed: mapGetters(["allUsers", "isPopupOpen"]),
   created() {
     this.fetchUsers();
   },

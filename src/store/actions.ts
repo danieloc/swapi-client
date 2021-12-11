@@ -1,8 +1,8 @@
 import { getAllUsersFromSwapi, getPlanetFromSwapi } from "@/api";
 import { ActionTree } from "vuex";
-import { UserState } from ".";
+import { State } from ".";
 
-export const actions: ActionTree<UserState, unknown> = {
+export const actions: ActionTree<State, unknown> = {
   fetchUsers: async ({ commit, dispatch }) => {
     try {
       const users = await getAllUsersFromSwapi();
@@ -33,5 +33,9 @@ export const actions: ActionTree<UserState, unknown> = {
         commit("addPlanet", { url: planetUrl, planet });
       })
     );
+  },
+
+  openPopup: ({ commit }) => {
+    commit("setPopupOpen");
   },
 };

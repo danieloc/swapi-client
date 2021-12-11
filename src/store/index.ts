@@ -5,26 +5,35 @@ import { actions } from "./actions";
 
 Vue.use(Vuex);
 
-export type UserState = {
+export type State = {
   users: User[];
   planets: {
     [key: string]: Planet;
   };
   hasError: boolean;
+  popup: {
+    open: boolean;
+    planetUrl?: string;
+  };
 };
 
-const initState: UserState = {
+const initState: State = {
   planets: {},
   users: [],
   hasError: false,
+  popup: {
+    open: false,
+  },
 };
 
-const getters: GetterTree<UserState, unknown> = {
+const getters: GetterTree<State, unknown> = {
   allUsers: (state) => state.users,
   allPlanets: (state) => state.planets,
+  isPopupOpen: (state) => state.popup.open,
+  popupPlanetDetails: (state) => state.planets[state.popup?.planetUrl || ""],
 };
 
-const mutations: MutationTree<UserState> = {
+const mutations: MutationTree<State> = {
   setUsers: (state, payload) => {
     state.users = payload.users;
   },
@@ -33,6 +42,12 @@ const mutations: MutationTree<UserState> = {
   },
   addPlanet: (state, { url, planet }) => {
     state.planets = { ...state.planets, [url]: planet };
+  },
+  setPopupOpen: (state, url) => {
+    state.popup = { open: true, planetUrl: url };
+  },
+  setPopupClosed: (state) => {
+    state.popup = { open: false };
   },
 };
 
