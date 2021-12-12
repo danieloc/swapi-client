@@ -40,7 +40,7 @@ export default Vue.extend({
   },
   data: () => {
     return {
-      mySVG: require("../assets/icons8-info.svg"),
+      mySVG: require("../assets/info.svg"),
     };
   },
   methods: mapActions(["openPopup"]),
@@ -55,7 +55,7 @@ export default Vue.extend({
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .user-container {
   max-width: 400px;
   background: black;
