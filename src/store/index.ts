@@ -7,9 +7,7 @@ Vue.use(Vuex);
 
 export type State = {
   users: User[];
-  planets: {
-    [key: string]: Planet;
-  };
+  planets: Planet[];
   hasError: boolean;
   popup: {
     open: boolean;
@@ -18,7 +16,7 @@ export type State = {
 };
 
 const initState: State = {
-  planets: {},
+  planets: [],
   users: [],
   hasError: false,
   popup: {
@@ -28,20 +26,22 @@ const initState: State = {
 
 const getters: GetterTree<State, unknown> = {
   allUsers: (state) => state.users,
-  allPlanets: (state) => state.planets,
+  usersPlanet: (state) => (homeworldUrl: string) =>
+    state.planets.find(({ url }) => url === homeworldUrl),
   isPopupOpen: (state) => state.popup.open,
-  popupPlanetDetails: (state) => state.planets[state.popup?.planetUrl || ""],
+  popupPlanetDetails: (state) =>
+    state.planets.find(({ url }) => url === state.popup.planetUrl),
 };
 
 const mutations: MutationTree<State> = {
   setUsers: (state, payload) => {
     state.users = payload.users;
   },
-  recordErrorFetchingUser: (state) => {
+  recordError: (state) => {
     state.hasError = true;
   },
-  addPlanet: (state, { url, planet }) => {
-    state.planets = { ...state.planets, [url]: planet };
+  setPlanets: (state, { planets }) => {
+    state.planets = planets;
   },
   setPopupOpen: (state, url) => {
     state.popup = { open: true, planetUrl: url };

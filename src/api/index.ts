@@ -10,14 +10,14 @@ export type SwapiUser = {
   homeworld: string;
 };
 
-type ApiResponse = {
+type PartialUserListResponse = {
   users: User[];
   hasNext: boolean;
 };
 
 export const getUserPageFromSwapi = async (
   page: number
-): Promise<ApiResponse | undefined> => {
+): Promise<PartialUserListResponse | undefined> => {
   try {
     const { data } = await axios.get<{
       results: SwapiUser[];
@@ -61,16 +61,43 @@ export const getAllUsersFromSwapi = async (page = 1): Promise<User[]> => {
   return [...users, ...restUsers];
 };
 
-export const getPlanetFromSwapi = async (
-  url: string
-): Promise<Planet | undefined> => {
+type PartialPlanetListResponse = {
+  planets: Planet[];
+  hasNext: boolean;
+};
+
+export const getPlanetPageFromSwapi = async (
+  page: number
+): Promise<PartialPlanetListResponse | undefined> => {
   try {
-    const { data } = await axios.get<Planet>(url);
-    return data;
+    const { data } = await axios.get<{
+      results: Planet[];
+      next: string;
+    }>(`http://swapi.dev/api/planets/?page=${page}`);
+    return {
+      planets: data.results,
+      hasNext: !!data.next,
+    };
   } catch (e) {
     console.log(
-      `There was an error while trying to fetch the homeworld at url ${url}`,
+      `There was an error while trying to fetch the homeworld for page ${page}`,
       e
     );
   }
+};
+
+export const getAllPlanetsFromSwapi = async (page = 1): Promise<Planet[]> => {
+  const response = await getPlanetPageFromSwapi(page);
+  if (!response) {
+    throw new Error("No user received from swapi api");
+  }
+
+  const { planets, hasNext } = response;
+
+  if (!hasNext) {
+    return planets;
+  }
+
+  const restPlanets = await getAllPlanetsFromSwapi(page + 1);
+  return [...planets, ...restPlanets];
 };

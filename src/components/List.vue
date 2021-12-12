@@ -7,6 +7,7 @@
         class="user"
         :key="user.name"
         v-bind:user="user"
+        v-bind:planet="usersPlanet(user.homeworldUrl)"
       />
     </div>
   </div>
@@ -19,13 +20,14 @@ import User from "./User.vue";
 
 export default Vue.extend({
   name: "List",
-  methods: mapActions(["fetchUsers"]),
+  methods: mapActions(["fetchUsers", "fetchPlanets"]),
   components: {
     User,
   },
-  computed: mapGetters(["allUsers", "isPopupOpen"]),
+  computed: mapGetters(["allUsers", "isPopupOpen", "usersPlanet"]),
   created() {
     this.fetchUsers();
+    this.fetchPlanets();
   },
 });
 </script>

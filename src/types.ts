@@ -3,6 +3,7 @@ export type Planet = {
   diameter: string;
   climate: string;
   population: string;
+  url: string;
 };
 
 export type User = {

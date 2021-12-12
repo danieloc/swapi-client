@@ -9,11 +9,9 @@
     <div>
       <span class="label">Edited:</span>{{ user.edited | formatDistance }}
     </div>
-    <div>
+    <div v-if="planet">
       <span class="label">Planet:</span>
-      {{
-        allPlanets[user.homeworldUrl] ? allPlanets[user.homeworldUrl].name : ""
-      }}
+      {{ planet.name }}
       <img
         v-on:click="openPopup(user.homeworldUrl)"
         :src="mySVG"
@@ -25,9 +23,9 @@
 </template>
 
 <script lang="ts">
-import { User } from "@/types";
+import { Planet, User } from "@/types";
 import Vue, { PropType } from "vue";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 import { formatDistance } from "date-fns";
 
 export default Vue.extend({
@@ -37,6 +35,9 @@ export default Vue.extend({
       type: Object as PropType<User>,
       required: true,
     },
+    planet: {
+      type: Object as PropType<Planet>,
+    },
   },
   data: () => {
     return {
@@ -44,7 +45,6 @@ export default Vue.extend({
     };
   },
   methods: mapActions(["openPopup"]),
-  computed: mapGetters(["allPlanets"]),
   filters: {
     formatDistance: (value: string) => {
       return formatDistance(new Date(value), new Date(), {
