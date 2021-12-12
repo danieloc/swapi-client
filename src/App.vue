@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Popup v-if="isPopupOpen" />
-    <List />
+    <div id="app" :class="isPopupOpen && 'blur'">
+      <List />
+    </div>
   </div>
 </template>
 
@@ -29,9 +31,12 @@ export default Vue.extend({
 body {
   margin: 0;
   font-family: Audiowide;
-  color: black;
   margin-top: 60px;
   background: #060c21;
   color: #fff200;
+}
+
+.blur {
+  filter: blur(5px) grayscale(90%);
 }
 </style>

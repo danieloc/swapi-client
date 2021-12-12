@@ -38,4 +38,8 @@ export const actions: ActionTree<State, unknown> = {
   openPopup: ({ commit }, url) => {
     commit("setPopupOpen", url);
   },
+
+  closePopup: ({ commit }) => {
+    commit("setPopupClosed");
+  },
 };
