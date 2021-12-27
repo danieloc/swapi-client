@@ -49,7 +49,7 @@ export default Vue.extend({
       const sort: keyof User = this.$data.sortValue;
       const users: User[] = this.$store.getters.allUsers;
       const filteredUsers = users.filter((user) =>
-        user.name.match(searchValue)
+        user.name.toLowerCase().match(searchValue.toLowerCase())
       );
 
       if (!sort) {
