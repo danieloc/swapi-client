@@ -4,13 +4,13 @@
       <Dropdown
         v-bind:label="'Sort'"
         :options="['Name', 'Height', 'Mass', 'Created', 'Edited', 'Planet']"
-        v-model="value"
+        v-model="sortValue"
       />
       <Search :label="'Search'" v-model="searchValue" />
     </div>
     <div class="list">
-      <User
-        v-for="user in allUsers"
+      <UserCard
+        v-for="user in filteredAndSortedUsers"
         class="user"
         :key="user.name"
         v-bind:user="user"
@@ -23,22 +23,41 @@
 <script lang="ts">
 import Vue from "vue";
 import { mapActions, mapGetters } from "vuex";
-import User from "./User.vue";
+import UserCard from "./User.vue";
 import Search from "./Search.vue";
 import Dropdown from "./Dropdown.vue";
+import { User } from "@/types";
 
 export default Vue.extend({
   name: "List",
   methods: mapActions(["fetchUsers", "fetchPlanets"]),
   components: {
-    User,
+    UserCard,
     Dropdown,
     Search,
   },
   computed: {
-    filteredAndSortedUsers: () => {
-      //const users = []; // Call get users here
-      // Filter users here, sort and return
+    filteredAndSortedUsers: function () {
+      const searchValue = this.$data.searchValue;
+      const sort = this.$data.sortValue;
+      const users: User[] = this.$store.getters.allUsers;
+      const filteredUsers = users.filter((user) =>
+        user.name.match(searchValue)
+      );
+
+      if (!sort) {
+        return filteredUsers;
+      }
+
+      return filteredUsers.sort((a: any, b: any) => {
+        if (a[sort] < b[sort]) {
+          return -1;
+        }
+        if (a[sort] > b[sort]) {
+          return 1;
+        }
+        return 0;
+      });
     },
     ...mapGetters(["allUsers", "isPopupOpen", "usersPlanet"]),
   },
@@ -49,7 +68,7 @@ export default Vue.extend({
   data: () => {
     return {
       searchValue: "",
-      value: "",
+      sortValue: "",
     };
   },
 });
