@@ -1,7 +1,13 @@
 <template>
   <div class="search-container">
     <h3 class="label">{{ label }}:</h3>
-    <input class="search" />
+    <input
+      class="search"
+      v-model="value"
+      placeholder="None"
+      v-on:input="$emit('input', $event.target.value)"
+      type="string"
+    />
   </div>
 </template>
 
@@ -12,6 +18,10 @@ export default Vue.extend({
   name: "Search",
   props: {
     label: {
+      type: String,
+      required: true,
+    },
+    value: {
       type: String,
       required: true,
     },
@@ -34,7 +44,7 @@ export default Vue.extend({
 
     padding: 16px 32px;
     display: block;
-    width: 200px;
+    width: 136px;
     border-radius: 5px;
   }
 }

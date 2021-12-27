@@ -58,7 +58,7 @@ export default Vue.extend({
 
     padding: 16px 32px;
     display: block;
-    width: 136px;
+    width: 200px;
     border-radius: 5px;
   }
 }

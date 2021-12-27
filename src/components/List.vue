@@ -5,7 +5,7 @@
         v-bind:label="'Sort'"
         :options="['Name', 'Height', 'Mass', 'Created', 'Edited', 'Planet']"
       />
-      <Search v-bind:label="'Search'" />
+      <Search :label="'Search'" v-model="searchValue" />
     </div>
     <div class="list">
       <User
@@ -34,10 +34,21 @@ export default Vue.extend({
     Dropdown,
     Search,
   },
-  computed: mapGetters(["allUsers", "isPopupOpen", "usersPlanet"]),
+  computed: {
+    filteredAndSortedUsers: () => {
+      //const users = []; // Call get users here
+      // Filter users here, sort and return
+    },
+    ...mapGetters(["allUsers", "isPopupOpen", "usersPlanet"]),
+  },
   created() {
     this.fetchUsers();
     this.fetchPlanets();
+  },
+  data: () => {
+    return {
+      searchValue: "",
+    };
   },
 });
 </script>
@@ -45,7 +56,7 @@ export default Vue.extend({
 <style lang="scss">
 .inputs {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }
 .list {
   display: flex;
