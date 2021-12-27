@@ -3,7 +3,14 @@
     <div class="inputs">
       <Dropdown
         v-bind:label="'Sort'"
-        :options="['Name', 'Height', 'Mass', 'Created', 'Edited', 'Planet']"
+        :options="[
+          { value: 'name', text: 'Name' },
+          { value: 'height', text: 'Height' },
+          { value: 'mass', text: 'Mass' },
+          { value: 'created', text: 'Created' },
+          { value: 'edited', text: 'Edited' },
+          { value: 'planet', text: 'Planet' },
+        ]"
         v-model="sortValue"
       />
       <Search :label="'Search'" v-model="searchValue" />
@@ -39,7 +46,7 @@ export default Vue.extend({
   computed: {
     filteredAndSortedUsers: function () {
       const searchValue = this.$data.searchValue;
-      const sort = this.$data.sortValue;
+      const sort: keyof User = this.$data.sortValue;
       const users: User[] = this.$store.getters.allUsers;
       const filteredUsers = users.filter((user) =>
         user.name.match(searchValue)
@@ -49,7 +56,7 @@ export default Vue.extend({
         return filteredUsers;
       }
 
-      return filteredUsers.sort((a: any, b: any) => {
+      return filteredUsers.sort((a: User, b: User) => {
         if (a[sort] < b[sort]) {
           return -1;
         }
@@ -59,7 +66,7 @@ export default Vue.extend({
         return 0;
       });
     },
-    ...mapGetters(["allUsers", "isPopupOpen", "usersPlanet"]),
+    ...mapGetters(["isPopupOpen", "usersPlanet"]),
   },
   created() {
     this.fetchUsers();

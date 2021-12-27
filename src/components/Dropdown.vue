@@ -10,16 +10,16 @@
       <option
         v-bind:key="option"
         v-for="option in options"
-        v-bind:value="option"
+        v-bind:value="option.value"
       >
-        {{ option }}
+        {{ option.text }}
       </option>
     </select>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue, { PropType } from "vue";
 
 export default Vue.extend({
   name: "Dropdown",
@@ -29,7 +29,10 @@ export default Vue.extend({
       required: true,
     },
     options: {
-      type: Array,
+      type: Object as PropType<{
+        value: string;
+        text: string;
+      }>,
       required: true,
     },
     value: {
