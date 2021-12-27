@@ -5,6 +5,7 @@
         v-bind:label="'Sort'"
         :options="['Name', 'Height', 'Mass', 'Created', 'Edited', 'Planet']"
       />
+      <Search v-bind:label="'Search'" />
     </div>
     <div class="list">
       <User
@@ -22,6 +23,7 @@
 import Vue from "vue";
 import { mapActions, mapGetters } from "vuex";
 import User from "./User.vue";
+import Search from "./Search.vue";
 import Dropdown from "./Dropdown.vue";
 
 export default Vue.extend({
@@ -30,6 +32,7 @@ export default Vue.extend({
   components: {
     User,
     Dropdown,
+    Search,
   },
   computed: mapGetters(["allUsers", "isPopupOpen", "usersPlanet"]),
   created() {
