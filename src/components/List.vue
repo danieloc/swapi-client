@@ -1,7 +1,9 @@
 <template>
   <div>
     <h3 class="header">Users</h3>
-    <Dropdown />
+    <div class="inputs">
+      <Dropdown />
+    </div>
     <div class="list">
       <User
         v-for="user in allUsers"
@@ -38,6 +40,10 @@ export default Vue.extend({
 <style lang="scss">
 .header {
   text-align: center;
+}
+.inputs {
+  display: flex;
+  justify-content: center;
 }
 .list {
   display: flex;
