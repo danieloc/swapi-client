@@ -1,8 +1,10 @@
 <template>
   <div>
-    <h3 class="header">Users</h3>
     <div class="inputs">
-      <Dropdown />
+      <Dropdown
+        v-bind:label="'Sort'"
+        :options="['Name', 'Height', 'Mass', 'Created', 'Edited', 'Planet']"
+      />
     </div>
     <div class="list">
       <User
@@ -38,9 +40,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-.header {
-  text-align: center;
-}
 .inputs {
   display: flex;
   justify-content: center;
