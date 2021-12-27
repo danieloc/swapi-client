@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="popup-container" v-on:click="closePopup">
     <div class="popup">
       <div class="close" v-on:click="closePopup">X</div>
       <p><span class="label">Name:</span> {{ popupPlanetDetails.name }}</p>
