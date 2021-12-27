@@ -4,6 +4,7 @@
       <Dropdown
         v-bind:label="'Sort'"
         :options="['Name', 'Height', 'Mass', 'Created', 'Edited', 'Planet']"
+        v-model="value"
       />
       <Search :label="'Search'" v-model="searchValue" />
     </div>
@@ -48,6 +49,7 @@ export default Vue.extend({
   data: () => {
     return {
       searchValue: "",
+      value: "",
     };
   },
 });

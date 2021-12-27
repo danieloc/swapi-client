@@ -1,8 +1,12 @@
 <template>
   <div class="dropdown-container">
     <h3 class="label">{{ label }}:</h3>
-    <select class="dropdown" v-model="selected">
-      <option :default="true" :selected="true" value="None">None</option>
+    <select
+      class="dropdown"
+      v-model="value"
+      v-on:input="$emit('input', $event.target.value)"
+    >
+      <option :default="true" value="">None</option>
       <option
         v-bind:key="option"
         v-for="option in options"
@@ -28,11 +32,10 @@ export default Vue.extend({
       type: Array,
       required: true,
     },
-  },
-  data: function () {
-    return {
-      selected: "None",
-    };
+    value: {
+      type: String,
+      required: true,
+    },
   },
 });
 </script>
